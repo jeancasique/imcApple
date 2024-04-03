@@ -13,6 +13,7 @@
 		699F8B6C2BBBFA2300A8F846 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 699F8B6B2BBBFA2300A8F846 /* Base */; };
 		699F8B6E2BBBFA2400A8F846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 699F8B6D2BBBFA2400A8F846 /* Assets.xcassets */; };
 		699F8B712BBBFA2400A8F846 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 699F8B702BBBFA2400A8F846 /* Base */; };
+		69D9FCCB2BBD46860022EB72 /* IMCCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D9FCCA2BBD46860022EB72 /* IMCCalculatorViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		699F8B6D2BBBFA2400A8F846 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		699F8B702BBBFA2400A8F846 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		699F8B722BBBFA2400A8F846 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69D9FCCA2BBD46860022EB72 /* IMCCalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMCCalculatorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +59,9 @@
 			isa = PBXGroup;
 			children = (
 				699F8B642BBBFA2300A8F846 /* AppDelegate.swift */,
-				699F8B662BBBFA2300A8F846 /* SceneDelegate.swift */,
+				69D9FCCA2BBD46860022EB72 /* IMCCalculatorViewController.swift */,
 				699F8B682BBBFA2300A8F846 /* ViewController.swift */,
+				699F8B662BBBFA2300A8F846 /* SceneDelegate.swift */,
 				699F8B6A2BBBFA2300A8F846 /* Main.storyboard */,
 				699F8B6D2BBBFA2400A8F846 /* Assets.xcassets */,
 				699F8B6F2BBBFA2400A8F846 /* LaunchScreen.storyboard */,
@@ -140,6 +143,7 @@
 			files = (
 				699F8B692BBBFA2300A8F846 /* ViewController.swift in Sources */,
 				699F8B652BBBFA2300A8F846 /* AppDelegate.swift in Sources */,
+				69D9FCCB2BBD46860022EB72 /* IMCCalculatorViewController.swift in Sources */,
 				699F8B672BBBFA2300A8F846 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
