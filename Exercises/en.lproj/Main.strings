@@ -1,0 +1,45 @@
+
+/* Class = "UILabel"; text = "Calculador IMC"; ObjectID = "844-cd-TxG"; */
+"844-cd-TxG.text" = "Calculador IMC";
+
+/* Class = "UILabel"; text = "Peso"; ObjectID = "FFM-br-Wig"; */
+"FFM-br-Wig.text" = "Peso";
+
+/* Class = "UITextField"; text = "     75 kg"; ObjectID = "Vcl-zx-PBu"; */
+"Vcl-zx-PBu.text" = "     75 kg";
+
+/* Class = "UIButton"; configuration.title = "Modo Oscuro"; ObjectID = "Xpd-iR-SCq"; */
+"Xpd-iR-SCq.configuration.title" = "Modo Oscuro";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Xpd-iR-SCq"; */
+"Xpd-iR-SCq.normalTitle" = "Button";
+
+/* Class = "UITextField"; text = "   1.50 cm"; ObjectID = "eXp-km-k7l"; */
+"eXp-km-k7l.text" = "   1.50 cm";
+
+/* Class = "UIButton"; configuration.title = "Calculadora IMC"; ObjectID = "fng-OY-6n1"; */
+"fng-OY-6n1.configuration.title" = "Calculadora IMC";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "fng-OY-6n1"; */
+"fng-OY-6n1.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Tareas"; ObjectID = "jhh-T6-r2r"; */
+"jhh-T6-r2r.configuration.title" = "Tareas";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "jhh-T6-r2r"; */
+"jhh-T6-r2r.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Apps Jean Paul"; ObjectID = "l1n-wp-6XI"; */
+"l1n-wp-6XI.text" = "Apps Jean Paul";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "mNv-aU-Dqc"; */
+"mNv-aU-Dqc.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Calcular"; ObjectID = "u9Z-lL-RgP"; */
+"u9Z-lL-RgP.configuration.title" = "Calcular";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "u9Z-lL-RgP"; */
+"u9Z-lL-RgP.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Altura"; ObjectID = "vfD-Je-8xE"; */
+"vfD-Je-8xE.text" = "Altura";
