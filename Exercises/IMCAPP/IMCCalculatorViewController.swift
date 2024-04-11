@@ -6,7 +6,8 @@ class IMCCalculatorViewController: UIViewController {
     @IBOutlet weak var alturaTextField: UITextField!
     @IBOutlet weak var resultadoLabel: UILabel!
     var lastCalculatedIMC: Double?
-  
+    var historialIMC: [String] = []
+
     @IBOutlet weak var pesoStepper: UIStepper!
     
     @IBOutlet weak var alturaStepper: UIStepper!
@@ -14,7 +15,6 @@ class IMCCalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Asegura que los steppers estén conectados antes de configurarlos.
         if pesoStepper != nil && alturaStepper != nil {
             configureSteppers()
         } else {
@@ -22,19 +22,26 @@ class IMCCalculatorViewController: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "MostrarHistorialSegue" {
+                if let destinoVC = segue.destination as? IMCTableViewController {
+                    destinoVC.historialIMC = self.historialIMC
+                }
+            }
+        }
     private func configureSteppers() {
         // Configura el stepper de peso con los valores iniciales y rangos.
+        //Peso
         pesoStepper.minimumValue = 1
         pesoStepper.maximumValue = 200
         pesoStepper.stepValue = 1
         pesoStepper.value = 75
         pesoTextField.text = "\(Int(pesoStepper.value)) kg"
-
-        // Configura el stepper de altura con los valores iniciales y rangos.
-        alturaStepper.minimumValue = 100 // 1.00 m en cm
-        alturaStepper.maximumValue = 300 // 3.00 m en cm
+        //Altura
+        alturaStepper.minimumValue = 100
+        alturaStepper.maximumValue = 300
         alturaStepper.stepValue = 1
-        alturaStepper.value = 150 // Valor inicial de 1.50 m en cm
+        alturaStepper.value = 150
         alturaTextField.text = "\(alturaStepper.value) cm"
     }
     
@@ -59,6 +66,12 @@ class IMCCalculatorViewController: UIViewController {
            lastCalculatedIMC = imc
            resultadoLabel.text = "Tu IMC es \(String(format: "%.2f", imc))"
            
+           // Asegúrate de que esta parte se encuentra después de la declaración y asignación de 'imc'
+           let resultadoIMC = "IMC: \(String(format: "%.2f", imc)) - \(Date())"
+           historialIMC.append(resultadoIMC)
+        
+           UserDefaults.standard.set(historialIMC, forKey: "historialIMC")
+           
            // Cambia el color del texto basado en el valor del IMC
            switch imc {
            case 0..<19:
@@ -77,7 +90,8 @@ class IMCCalculatorViewController: UIViewController {
            }
         
     }
-    @IBAction func changeThemePressed(_ sender: UIButton) {
+    
+    @IBAction func changeThemePressed(_ sender: UIBarButtonItem) {
             if #available(iOS 13.0, *) {
                     let newStyle: UIUserInterfaceStyle = self.view.overrideUserInterfaceStyle == .dark ? .light : .dark
                     self.view.overrideUserInterfaceStyle = newStyle
@@ -95,19 +109,20 @@ class IMCCalculatorViewController: UIViewController {
         shareIMCResult()
     }
     func shareIMCResult() {
-        // Asegúrate de que esta cadena refleje el último resultado del IMC calculado.
-        let imcResult = "Tu IMC es \(String(format: "%.2f", lastCalculatedIMC!))"
-        let activityController = UIActivityViewController(activityItems: [imcResult], applicationActivities: nil)
-        
-        // Importante para iPads, define el origen del popover.
-        if let popoverController = activityController.popoverPresentationController {
-            popoverController.sourceView = self.view // o `sender` si estás pasando el UIButton como el sender
-            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-            popoverController.permittedArrowDirections = []
-        }
-        
-        // Presenta el controlador de actividad.
-        self.present(activityController, animated: true, completion: nil)
-    }
+        guard let imc = lastCalculatedIMC else {
+               print("IMC no calculado aún.")
+               // Muestra un mensaje al usuario indicando que necesita calcular el IMC primero en modo Alert
+               
+               let alert = UIAlertController(title: "IMC no calculado", message: "Por favor, calcula tu IMC antes de compartirlo.", preferredStyle: .alert)
+               alert.addAction(UIAlertAction(title: "OK", style: .default))
+               self.present(alert, animated: true, completion: nil)
+               return
+           }
+           
+           let imcResult = "Tu IMC es \(String(format: "%.2f", imc))"
+           let activityController = UIActivityViewController(activityItems: [imcResult], applicationActivities: nil)
+           
+           // Presenta el controlador de actividad.
+           self.present(activityController, animated: true, completion: nil)}
 
 }

@@ -14,11 +14,18 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
+      
+        }
 
+        
+    @IBAction func MoviesButton(_ sender: UIButton) {
+    }
+    
     @IBAction func calculadoraIMC(_ sender: UIButton) {
     }
     
+    @IBAction func TareasButton(_ sender: UIButton) {
+    }
 }
+
 

@@ -7,23 +7,34 @@
 
 import UIKit
 
-class TaskViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+class TaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBOutlet weak var taskTableView: UITableView!
+    
+    
+    var tasks: [Task] = [
+            Task(title: "Tarea de ejemplo 1", isCompleted: false),
+            Task(title: "Tarea de ejemplo 2", isCompleted: true)
+        ]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        taskTableView.dataSource = self
+        taskTableView.delegate = self
     }
-    */
-
+    
+    // DataSource methods
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            // Aquí retornarás el número de tareas
+            return tasks.count
+        }
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            // Aquí configurarás y retornarás cada celda de la lista
+            let cell = taskTableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
+            cell.textLabel?.text = tasks[indexPath.row].title
+            return cell
+        }
+    
 }

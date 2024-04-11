@@ -1,7 +1,5 @@
-/* 
-  Localizable.strings
-  Exercises
-
-  Created by Mañanas on 4/4/24.
-  
-*/
+// Localizable.strings (English)
+"calculateBMI" = "Calculate BMI";
+"weight" = "Weight (kg)";
+"height" = "Height (cm)";
+"yourBMI" = "Your BMI is";

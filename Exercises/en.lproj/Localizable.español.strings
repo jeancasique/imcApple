@@ -1,7 +1,5 @@
-/* 
-  Localizable.español.strings
-  Exercises
-
-  Created by Mañanas on 4/4/24.
-  
-*/
+// Localizable.strings (español u otro idioma base que uses)
+"calculateBMI" = "Calcular IMC";
+"weight" = "Peso (kg)";
+"height" = "Altura (cm)";
+"yourBMI" = "Tu IMC es";
