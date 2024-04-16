@@ -18,12 +18,11 @@
 		69D9FCCB2BBD46860022EB72 /* IMCCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D9FCCA2BBD46860022EB72 /* IMCCalculatorViewController.swift */; };
 		6C4D579A2BC7ED8700054B87 /* TaskStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C4D57992BC7ED8700054B87 /* TaskStoryboard.storyboard */; };
 		6C4D579C2BC7EDA700054B87 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4D579B2BC7EDA700054B87 /* TaskViewController.swift */; };
-		6C4D579E2BC8064D00054B87 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4D579D2BC8064D00054B87 /* TaskModel.swift */; };
 		6CB169AB2BC3D69C00499AE8 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB169AA2BC3D69C00499AE8 /* MoviesViewController.swift */; };
 		6CB169B02BC3DFDA00499AE8 /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB169AF2BC3DFDA00499AE8 /* Movies.swift */; };
 		6CB169B42BC3EEBD00499AE8 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB169B32BC3EEBD00499AE8 /* MovieTableViewCell.swift */; };
 		6CB169B62BC4029300499AE8 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB169B52BC4029300499AE8 /* MovieService.swift */; };
-		6CC729E12BBE9E8A00C21E01 /* TareasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC729E02BBE9E8A00C21E01 /* TareasApp.swift */; };
+		6CD1F69C2BC933DB00A4FDE6 /* NotaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD1F69B2BC933DB00A4FDE6 /* NotaViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,13 +38,12 @@
 		69D9FCCA2BBD46860022EB72 /* IMCCalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMCCalculatorViewController.swift; sourceTree = "<group>"; };
 		6C4D57992BC7ED8700054B87 /* TaskStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TaskStoryboard.storyboard; sourceTree = "<group>"; };
 		6C4D579B2BC7EDA700054B87 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
-		6C4D579D2BC8064D00054B87 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		6CB169AA2BC3D69C00499AE8 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		6CB169AF2BC3DFDA00499AE8 /* Movies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
 		6CB169B32BC3EEBD00499AE8 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		6CB169B52BC4029300499AE8 /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
-		6CC729E02BBE9E8A00C21E01 /* TareasApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TareasApp.swift; sourceTree = "<group>"; };
 		6CC729F22BBEC10F00C21E01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CD1F69B2BC933DB00A4FDE6 /* NotaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotaViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +100,6 @@
 				6933291E2BC45A200060E5FB /* IMCAPP */,
 				6933291D2BC4594E0060E5FB /* MoviesApp */,
 				699F8B642BBBFA2300A8F846 /* AppDelegate.swift */,
-				6CC729E02BBE9E8A00C21E01 /* TareasApp.swift */,
 				699F8B682BBBFA2300A8F846 /* ViewController.swift */,
 				699F8B662BBBFA2300A8F846 /* SceneDelegate.swift */,
 				699F8B6A2BBBFA2300A8F846 /* Main.storyboard */,
@@ -117,7 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				6C4D579B2BC7EDA700054B87 /* TaskViewController.swift */,
-				6C4D579D2BC8064D00054B87 /* TaskModel.swift */,
+				6CD1F69B2BC933DB00A4FDE6 /* NotaViewController.swift */,
 				6C4D57992BC7ED8700054B87 /* TaskStoryboard.storyboard */,
 			);
 			path = TaskApp;
@@ -207,16 +204,15 @@
 				6984478F2BC49447006F2011 /* DetailViewController.swift in Sources */,
 				6CB169B02BC3DFDA00499AE8 /* Movies.swift in Sources */,
 				699F8B692BBBFA2300A8F846 /* ViewController.swift in Sources */,
-				6CC729E12BBE9E8A00C21E01 /* TareasApp.swift in Sources */,
 				699F8B652BBBFA2300A8F846 /* AppDelegate.swift in Sources */,
 				6C4D579C2BC7EDA700054B87 /* TaskViewController.swift in Sources */,
 				69D9FCCB2BBD46860022EB72 /* IMCCalculatorViewController.swift in Sources */,
 				699F8B672BBBFA2300A8F846 /* SceneDelegate.swift in Sources */,
 				6CB169B62BC4029300499AE8 /* MovieService.swift in Sources */,
 				693329202BC45A4F0060E5FB /* IMCTableViewController.swift in Sources */,
-				6C4D579E2BC8064D00054B87 /* TaskModel.swift in Sources */,
 				6CB169B42BC3EEBD00499AE8 /* MovieTableViewCell.swift in Sources */,
 				6CB169AB2BC3D69C00499AE8 /* MoviesViewController.swift in Sources */,
+				6CD1F69C2BC933DB00A4FDE6 /* NotaViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

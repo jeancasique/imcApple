@@ -14,10 +14,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        // Establece el color del botón de regreso en la barra de navegación
+        self.navigationController?.navigationBar.tintColor = UIColor.systemYellow
         }
-
-        
+   
     @IBAction func MoviesButton(_ sender: UIButton) {
     }
     
@@ -25,6 +25,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func TareasButton(_ sender: UIButton) {
+        }
+    
+    @IBAction func Login(_ sender: UIButton) {
     }
 }
 

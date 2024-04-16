@@ -101,7 +101,6 @@ class IMCCalculatorViewController: UIViewController {
             }
         }
     
-    
     @IBAction func HistorialButton(_ sender: Any) {
     }
     

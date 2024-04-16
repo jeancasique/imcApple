@@ -26,7 +26,7 @@ class IMCTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Usa "HistorialCell" como el identificador de la celda.
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistorialCell", for: indexPath)
 
         cell.textLabel?.text = historialIMC[indexPath.row]
