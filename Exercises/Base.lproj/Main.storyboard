@@ -73,7 +73,6 @@
                                 <buttonConfiguration key="configuration" style="gray" title="Login"/>
                                 <connections>
                                     <action selector="Login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rjR-MX-VwM"/>
-                                    <segue destination="q6y-em-tfG" kind="show" id="4Il-hX-dW1"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="h6Z-oe-2DP">

@@ -1,22 +1,29 @@
-//
-//  AppDelegate.swift
-//  Exercises
-//
-//  Created by Jean Casique on 2/4/24.
-//
 
-import UIKit
+import SwiftUI
+
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    //FirebaseApp.configure()
+    return true
+  }
+}
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+struct YourApp: App {
+  // register app delegate for Firebase setup
+  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
-
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
-        return true
+  var body: some Scene {
+    WindowGroup {
+      NavigationView {
+       
+      }
     }
+  }
+}
+    
 
     // MARK: UISceneSession Lifecycle
 
@@ -34,5 +41,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
-}
+
 

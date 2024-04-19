@@ -1,11 +1,7 @@
-//
-//  ViewController.swift
-//  Exercises
-//
-//  Created by Jean Casique on 2/4/24.
-//
 
+import SwiftUI
 import UIKit
+
 
 class ViewController: UIViewController {
 
@@ -28,6 +24,8 @@ class ViewController: UIViewController {
         }
     
     @IBAction func Login(_ sender: UIButton) {
+        let viewController = UIHostingController(rootView: LoginView())
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
