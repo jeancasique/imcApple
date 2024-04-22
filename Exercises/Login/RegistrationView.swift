@@ -18,7 +18,7 @@ struct RegistrationView: View {
     @State private var shouldNavigateToLogin = false
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section(header: Text("Información Personal")) {
                     TextField("Nombre", text: $name)
@@ -64,20 +64,26 @@ struct RegistrationView: View {
                 }
             }
             .navigationTitle("Registro")
-            .navigationBarTitleDisplayMode(.inline)
             .alert(isPresented: $showAlert) {
-                Alert(title: Text("Registro"), message: Text(alertMessage), dismissButton: .default(Text("OK"), action: {
-                    if shouldNavigateToLogin {
-                        self.shouldNavigateToLogin = false
-                    }
-                }))
+                Alert(
+                    title: Text("Registro"),
+                    message: Text(alertMessage),
+                    dismissButton: .default(Text("OK"), action: {
+                        if shouldNavigateToLogin {
+                            self.shouldNavigateToLogin = true
+                        }
+                    })
+                )
             }
-            .background(NavigationLink("", destination: LoginView(), isActive: $shouldNavigateToLogin))
+                .background(
+                                NavigationLink(destination: LoginView(), isActive: $shouldNavigateToLogin) { }
+                            )
         }
     }
 
     private func validateAndCreateUser() {
         formErrors.removeAll()
+
         validateField("name", value: name, errorMessage: "El nombre es obligatorio.")
         validateField("lastName", value: lastName, errorMessage: "Los apellidos son obligatorios.")
         validateField("gender", value: gender, errorMessage: "El sexo es obligatorio.")
@@ -98,33 +104,37 @@ struct RegistrationView: View {
             }
         }
     }
-    private func validateField(_ field: String, value: String, errorMessage: String, validation: ((String) -> Bool)? = nil) {
-        if value.isEmpty {
-            formErrors[field] = errorMessage
-        } else if let validation = validation, !validation(value) {
-            formErrors[field] = errorMessage
-        } else {
-            formErrors[field] = nil
-        }
-    }
 
     private func saveUserData(_ user: User) {
         let db = Firestore.firestore()
         let userData = [
             "firstName": name,
             "lastName": lastName,
-            "birthDate": "\(birthDate)", // ISO 8601 format
+            "birthDate": "\(birthDate)", // Formato ISO 8601
             "gender": gender
         ]
-        db.collection("users").document(user.uid).setData(userData) { error in
+        db.collection("Prueba").document(user.uid).setData(userData) { error in
             if let error = error {
-                alertMessage = "Error saving user data: \(error.localizedDescription)"
+                alertMessage = "Error al guardar datos del usuario: \(error.localizedDescription)"
                 showAlert = true
             } else {
                 alertMessage = "Registro exitoso. Por favor inicia sesión con tus nuevas credenciales."
                 showAlert = true
                 shouldNavigateToLogin = true
             }
+        }
+    }
+
+    private func validateField(_ field: String, value: String, errorMessage: String, validation: ((String) -> Bool)? = nil) {
+        if value.isEmpty {
+            formErrors[field] = errorMessage
+            return
+        }
+
+        if let validation = validation, !validation(value) {
+            formErrors[field] = errorMessage
+        } else {
+            formErrors[field] = nil
         }
     }
 
