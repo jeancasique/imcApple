@@ -17,6 +17,15 @@ struct RegistrationView: View {
     @State private var showAlert = false
     @State private var shouldNavigateToLogin = false
 
+    // Estado para rastrear si se ha presionado el botón de "Crear Usuario"
+    @State private var createUserButtonPressed = false
+
+    // Estado para rastrear si el correo electrónico está en uso
+    @State private var isEmailInUse = false
+
+    // Estado para almacenar el mensaje de error específico del correo electrónico
+    @State private var emailErrorMessage = ""
+
     var body: some View {
         NavigationStack {
             Form {
@@ -59,8 +68,23 @@ struct RegistrationView: View {
                     }
                 }
 
-                Button("Crear Usuario") {
-                    validateAndCreateUser()
+                // Utilizar un botón personalizado para agregar interacción de cambio de color
+                Button(action: {
+                    // Establecer el estado para indicar que se ha presionado el botón
+                    createUserButtonPressed = true
+                    // Verificar la disponibilidad del correo electrónico antes de crear la cuenta
+                    checkEmailAvailability()
+                    // Solo crear la cuenta si el correo electrónico no está en uso
+                    if !isEmailInUse {
+                        validateAndCreateUser()
+                    }
+                }) {
+                    Text("Crear Usuario")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(createUserButtonPressed ? Color.blue : Color.gray)
+                        .cornerRadius(8)
                 }
             }
             .navigationTitle("Registro")
@@ -113,7 +137,7 @@ struct RegistrationView: View {
             "birthDate": "\(birthDate)", // Formato ISO 8601
             "gender": gender
         ]
-        db.collection("Prueba").document(user.uid).setData(userData) { error in
+        db.collection("users").document(user.uid).setData(userData) { error in
             if let error = error {
                 alertMessage = "Error al guardar datos del usuario: \(error.localizedDescription)"
                 showAlert = true
@@ -148,6 +172,20 @@ struct RegistrationView: View {
         let passwordFormat = "^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{5,}$"
         let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordFormat)
         return passwordPredicate.evaluate(with: password)
+    }
+
+    private func checkEmailAvailability() {
+        Auth.auth().fetchSignInMethods(forEmail: email) { methods, error in
+            if let error = error {
+                print("Error fetching sign-in methods: \(error.localizedDescription)")
+                return
+            }
+            // Si methods contiene métodos de inicio de sesión, el correo electrónico está en uso
+            if let methods = methods, !methods.isEmpty {
+                isEmailInUse = true
+                emailErrorMessage = "El correo electrónico ya está en uso."
+            }
+        }
     }
 }
 

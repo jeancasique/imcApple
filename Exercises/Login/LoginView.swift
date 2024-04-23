@@ -21,7 +21,9 @@ struct LoginView: View {
             .navigationTitle("Iniciar Sesión")
             .navigationBarTitleDisplayMode(.inline)
             .background(
-                NavigationLink("", destination: PerfilView(email: email, firstName: "Nombre", lastName: "Apellido", birthDate: Date(), gender: "No especificado"), isActive: $isUserLoggedIn)
+                NavigationLink(destination: PerfilView(), isActive: $isUserLoggedIn) {
+                    EmptyView()
+                }
             )
         }
     }
@@ -139,4 +141,3 @@ struct LoginView_Previews: PreviewProvider {
         LoginView()
     }
 }
-
