@@ -1,7 +1,8 @@
 import SwiftUI
-import FirebaseAuth
 import Firebase
+import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
 struct RegistrationView: View {
     @State private var name = ""
@@ -11,19 +12,16 @@ struct RegistrationView: View {
     @State private var confirmPassword = ""
     @State private var birthDate = Date()
     @State private var gender = ""
+    @State private var profileImage: UIImage?
+    @State private var showImagePicker = false
     @State private var formErrors = [String: String]()
 
     @State private var alertMessage = ""
     @State private var showAlert = false
     @State private var shouldNavigateToLogin = false
 
-    // Estado para rastrear si se ha presionado el botón de "Crear Usuario"
     @State private var createUserButtonPressed = false
-
-    // Estado para rastrear si el correo electrónico está en uso
     @State private var isEmailInUse = false
-
-    // Estado para almacenar el mensaje de error específico del correo electrónico
     @State private var emailErrorMessage = ""
 
     var body: some View {
@@ -49,6 +47,12 @@ struct RegistrationView: View {
                     if let error = formErrors["gender"] {
                         Text(error).foregroundColor(.red).font(.caption)
                     }
+
+                    Button("Cargar Imagen") {
+                        self.showImagePicker = true
+                    }.sheet(isPresented: $showImagePicker) {
+                        ImagePicker(image: $profileImage)
+                    }
                 }
 
                 Section(header: Text("Credenciales de Acceso")) {
@@ -68,24 +72,13 @@ struct RegistrationView: View {
                     }
                 }
 
-                // Utilizar un botón personalizado para agregar interacción de cambio de color
-                Button(action: {
-                    // Establecer el estado para indicar que se ha presionado el botón
+                Button("Crear Usuario") {
                     createUserButtonPressed = true
-                    // Verificar la disponibilidad del correo electrónico antes de crear la cuenta
                     checkEmailAvailability()
-                    // Solo crear la cuenta si el correo electrónico no está en uso
                     if !isEmailInUse {
                         validateAndCreateUser()
                     }
-                }) {
-                    Text("Crear Usuario")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(createUserButtonPressed ? Color.blue : Color.gray)
-                        .cornerRadius(8)
-                }
+                }.buttonStyle(.borderedProminent)
             }
             .navigationTitle("Registro")
             .alert(isPresented: $showAlert) {
@@ -99,9 +92,9 @@ struct RegistrationView: View {
                     })
                 )
             }
-                .background(
-                                NavigationLink(destination: LoginView(), isActive: $shouldNavigateToLogin) { }
-                            )
+            .background(
+                NavigationLink(destination: LoginView(), isActive: $shouldNavigateToLogin) { }
+            )
         }
     }
 
@@ -131,20 +124,55 @@ struct RegistrationView: View {
 
     private func saveUserData(_ user: User) {
         let db = Firestore.firestore()
-        let userData = [
-            "firstName": name,
-            "lastName": lastName,
-            "birthDate": "\(birthDate)", // Formato ISO 8601
-            "gender": gender
-        ]
-        db.collection("users").document(user.uid).setData(userData) { error in
-            if let error = error {
-                alertMessage = "Error al guardar datos del usuario: \(error.localizedDescription)"
-                showAlert = true
-            } else {
-                alertMessage = "Registro exitoso. Por favor inicia sesión con tus nuevas credenciales."
-                showAlert = true
-                shouldNavigateToLogin = true
+        let storageRef = Storage.storage().reference().child("profileImages/\(user.uid).jpg")
+
+        if let imageData = profileImage?.jpegData(compressionQuality: 0.4) {
+            storageRef.putData(imageData, metadata: nil) { metadata, error in
+                guard let metadata = metadata else {
+                    print("Error uploading image: \(String(describing: error))")
+                    return
+                }
+                storageRef.downloadURL { (url, error) in
+                    guard let downloadURL = url else {
+                        print("Error getting download URL: \(String(describing: error))")
+                        return
+                    }
+                    let userData = [
+                        "firstName": name,
+                        "lastName": lastName,
+                        "birthDate": Timestamp(date: birthDate),
+                        "gender": gender,
+                        "profileImageUrl": downloadURL.absoluteString
+                    ]
+                    db.collection("users").document(user.uid).setData(userData) { error in
+                        if let error = error {
+                            alertMessage = "Error al guardar datos del usuario: \(error.localizedDescription)"
+                            showAlert = true
+                        } else {
+                            alertMessage = "Registro exitoso. Por favor inicia sesión con tus nuevas credenciales."
+                            showAlert = true
+                            shouldNavigateToLogin = true
+                        }
+                    }
+                }
+            }
+        } else {
+            // Save without image
+            let userData = [
+                "firstName": name,
+                "lastName": lastName,
+                "birthDate": Timestamp(date: birthDate),
+                "gender": gender
+            ]
+            db.collection("users").document(user.uid).setData(userData) { error in
+                if let error = error {
+                    alertMessage = "Error al guardar datos del usuario: \(error.localizedDescription)"
+                    showAlert = true
+                } else {
+                    alertMessage = "Registro exitoso. Por favor inicia sesión con tus nuevas credenciales."
+                    showAlert = true
+                    shouldNavigateToLogin = true
+                }
             }
         }
     }
@@ -180,10 +208,11 @@ struct RegistrationView: View {
                 print("Error fetching sign-in methods: \(error.localizedDescription)")
                 return
             }
-            // Si methods contiene métodos de inicio de sesión, el correo electrónico está en uso
             if let methods = methods, !methods.isEmpty {
                 isEmailInUse = true
                 emailErrorMessage = "El correo electrónico ya está en uso."
+            } else {
+                isEmailInUse = false
             }
         }
     }

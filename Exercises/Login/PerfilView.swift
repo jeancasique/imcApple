@@ -45,7 +45,7 @@ struct PerfilView: View {
 
                     userInfoField(label: "Nombre", value: $userData.firstName, editing: $editingField, fieldKey: "firstName", editable: true)
                     userInfoField(label: "Apellidos", value: $userData.lastName, editing: $editingField, fieldKey: "lastName", editable: true)
-                    datePickerField(label: "Fecha de Nacimiento", date: $userData.birthDate, editingField: $editingField, fieldKey: "birthDate")
+                    datePickerField(label: "Fecha de Nacimiento", date: $userData.birthDate, editing: $editingField, fieldKey: "birthDate")
                     userInfoField(label: "Género", value: $userData.gender, editing: $editingField, fieldKey: "gender", editable: true)
 
                     Button("Guardar Cambios", action: saveData)
@@ -123,14 +123,107 @@ struct PerfilView: View {
         }
     }
 
-    func datePickerField(label: String, date: Binding<Date>, editingField: Binding<String?>, fieldKey: String) -> some View {
+    func datePickerField(label: String, date: Binding<Date>, editing: Binding<String?>, fieldKey: String) -> some View {
         DatePicker(label, selection: date, displayedComponents: .date)
             .padding()
             .onChange(of: date) { _ in
-                editingField.wrappedValue = nil
+                editing.wrappedValue = nil
             }
     }
 
-    // [The rest of the PerfilView code remains unchanged]
+    func saveData() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let db = Firestore.firestore()
+        let storageRef = Storage.storage().reference().child("profileImages/\(uid).jpg")
+
+        if let imageData = userData.profileImage?.jpegData(compressionQuality: 0.4) {
+            storageRef.putData(imageData, metadata: nil) { metadata, error in
+                guard let metadata = metadata else {
+                    alertMessage = "Error uploading image: \(error?.localizedDescription ?? "Unknown error")"
+                    showAlert = true
+                    return
+                }
+
+                storageRef.downloadURL { url, error in
+                    guard let downloadURL = url else {
+                        alertMessage = "Error getting download URL: \(error?.localizedDescription ?? "Unknown error")"
+                        showAlert = true
+                        return
+                    }
+
+                    let userDataToUpdate: [String: Any] = [
+                        "firstName": userData.firstName,
+                        "lastName": userData.lastName,
+                        "email": userData.email,
+                        "birthDate": Timestamp(date: userData.birthDate),
+                        "gender": userData.gender,
+                        "profileImageUrl": downloadURL.absoluteString
+                    ]
+
+                    db.collection("users").document(uid).setData(userDataToUpdate) { error in
+                        if let error = error {
+                            alertMessage = "Error saving user data: \(error.localizedDescription)"
+                        } else {
+                            alertMessage = "Data saved successfully!"
+                        }
+                        showAlert = true
+                    }
+                }
+            }
+        } else {
+            // Save without image change
+            let userDataToUpdate: [String: Any] = [
+                "firstName": userData.firstName,
+                "lastName": userData.lastName,
+                "email": userData.email,
+                "birthDate": Timestamp(date: userData.birthDate),
+                "gender": userData.gender
+            ]
+
+            db.collection("users").document(uid).setData(userDataToUpdate) { error in
+                if let error = error {
+                    alertMessage = "Error saving user data: \(error.localizedDescription)"
+                } else {
+                    alertMessage = "Data saved successfully!"
+                }
+                showAlert = true
+            }
+        }
+    }
+
+    func loadUserData() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let db = Firestore.firestore()
+
+        db.collection("users").document(uid).getDocument { document, error in
+            if let document = document, document.exists {
+                let data = document.data()
+                userData.firstName = data?["firstName"] as? String ?? ""
+                userData.lastName = data?["lastName"] as? String ?? ""
+                userData.email = data?["email"] as? String ?? ""
+                userData.gender = data?["gender"] as? String ?? ""
+                userData.birthDate = (data?["birthDate"] as? Timestamp)?.dateValue() ?? Date()
+
+                if let profileImageUrl = data?["profileImageUrl"] as? String {
+                    loadImageFromURL(profileImageUrl)
+                }
+            } else {
+                alertMessage = "Document does not exist"
+                showAlert = true
+            }
+        }
+    }
+
+    func loadImageFromURL(_ urlString: String) {
+        if let url = URL(string: urlString) {
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let data = data, let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        userData.profileImage = image
+                    }
+                }
+            }.resume()
+        }
+    }
 }
 
