@@ -24,8 +24,10 @@
 		6CB169B02BC3DFDA00499AE8 /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB169AF2BC3DFDA00499AE8 /* Movies.swift */; };
 		6CB169B42BC3EEBD00499AE8 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB169B32BC3EEBD00499AE8 /* MovieTableViewCell.swift */; };
 		6CB169B62BC4029300499AE8 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB169B52BC4029300499AE8 /* MovieService.swift */; };
-		6CBB09C52BD25AE500F6FF0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CBB09C42BD25AE500F6FF0D /* GoogleService-Info.plist */; };
 		6CD1F69C2BC933DB00A4FDE6 /* NotaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD1F69B2BC933DB00A4FDE6 /* NotaViewController.swift */; };
+		6CD67BBD2BD7DEE800931496 /* PerfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD67BBB2BD7DEE800931496 /* PerfilView.swift */; };
+		6CD67BBE2BD7DEE800931496 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD67BBC2BD7DEE800931496 /* ImagePicker.swift */; };
+		6CD67BC02BD7DF3100931496 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CD67BBF2BD7DF3100931496 /* GoogleService-Info.plist */; };
 		A1FE2F4104E7709F693D9698 /* Pods_Exercises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7590A6E45412D535BF2D5AC /* Pods_Exercises.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,9 +51,11 @@
 		6CB169AF2BC3DFDA00499AE8 /* Movies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
 		6CB169B32BC3EEBD00499AE8 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		6CB169B52BC4029300499AE8 /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
-		6CBB09C42BD25AE500F6FF0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6CC729F22BBEC10F00C21E01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CD1F69B2BC933DB00A4FDE6 /* NotaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotaViewController.swift; sourceTree = "<group>"; };
+		6CD67BBB2BD7DEE800931496 /* PerfilView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerfilView.swift; sourceTree = "<group>"; };
+		6CD67BBC2BD7DEE800931496 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		6CD67BBF2BD7DF3100931496 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		707C9447D1BDC999A5C2D4C6 /* Pods-Exercises.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Exercises.release.xcconfig"; path = "Target Support Files/Pods-Exercises/Pods-Exercises.release.xcconfig"; sourceTree = "<group>"; };
 		D7590A6E45412D535BF2D5AC /* Pods_Exercises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Exercises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -99,7 +103,7 @@
 		699F8B582BBBFA2300A8F846 = {
 			isa = PBXGroup;
 			children = (
-				6CBB09C42BD25AE500F6FF0D /* GoogleService-Info.plist */,
+				6CD67BBF2BD7DF3100931496 /* GoogleService-Info.plist */,
 				699F8B632BBBFA2300A8F846 /* Exercises */,
 				699F8B622BBBFA2300A8F846 /* Products */,
 				E01C0AEA9E175B09680F8305 /* Pods */,
@@ -155,6 +159,8 @@
 		6CADF0FC2BCFB17200C28739 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				6CD67BBC2BD7DEE800931496 /* ImagePicker.swift */,
+				6CD67BBB2BD7DEE800931496 /* PerfilView.swift */,
 				6CADF0FF2BCFB1D000C28739 /* LoginView.swift */,
 				6CADF1012BCFE45700C28739 /* RegistrationView.swift */,
 			);
@@ -235,7 +241,7 @@
 			files = (
 				6C4D579A2BC7ED8700054B87 /* TaskStoryboard.storyboard in Resources */,
 				699F8B6E2BBBFA2400A8F846 /* Assets.xcassets in Resources */,
-				6CBB09C52BD25AE500F6FF0D /* GoogleService-Info.plist in Resources */,
+				6CD67BC02BD7DF3100931496 /* GoogleService-Info.plist in Resources */,
 				699F8B712BBBFA2400A8F846 /* Base in Resources */,
 				699F8B6C2BBBFA2300A8F846 /* Base in Resources */,
 			);
@@ -297,11 +303,13 @@
 				6CADF1022BCFE45700C28739 /* RegistrationView.swift in Sources */,
 				6C4D579C2BC7EDA700054B87 /* TaskViewController.swift in Sources */,
 				69D9FCCB2BBD46860022EB72 /* IMCCalculatorViewController.swift in Sources */,
+				6CD67BBD2BD7DEE800931496 /* PerfilView.swift in Sources */,
 				699F8B672BBBFA2300A8F846 /* SceneDelegate.swift in Sources */,
 				6CB169B62BC4029300499AE8 /* MovieService.swift in Sources */,
 				693329202BC45A4F0060E5FB /* IMCTableViewController.swift in Sources */,
 				6CB169B42BC3EEBD00499AE8 /* MovieTableViewCell.swift in Sources */,
 				6CADF1002BCFB1D000C28739 /* LoginView.swift in Sources */,
+				6CD67BBE2BD7DEE800931496 /* ImagePicker.swift in Sources */,
 				6CB169AB2BC3D69C00499AE8 /* MoviesViewController.swift in Sources */,
 				6CD1F69C2BC933DB00A4FDE6 /* NotaViewController.swift in Sources */,
 			);
